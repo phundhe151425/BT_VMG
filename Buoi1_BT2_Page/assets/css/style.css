@@ -27,8 +27,12 @@ a{
     color: black;
 }
 
+body{
+    
+    
+}
 #main{
-    height: 5000px;
+    /* height: 5000px; */
 }
 
 #header{
@@ -51,10 +55,12 @@ a{
     font-size: 19px;
     padding-left: 20px;
     padding-right: 20px;
+    text-decoration: none;
 }
 
 #header .logo-brand a:hover{
     cursor: pointer;
+    text-decoration: none;
 }
 
 #header .logo{
@@ -88,10 +94,14 @@ a{
     left: 20px;
     position: absolute;
     top: 4px;
+    text-decoration: none;
+    text-decoration-line: none;
 }
 
 #header .product-switcher a:hover{
     cursor: pointer;
+    text-decoration: none;
+    text-decoration-line: none;
 }
 
 #header .btn-close{
@@ -132,17 +142,173 @@ a{
 }
 
 #navbar{
-
+    position: fixed;
+    top: 60px;
+    width: 100%;
+    height: 100px;
+    /* min-height: 70px; */
+    background-color: #ffffff;
+    border-bottom: 1px solid #444;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: inline-block;
 }
 
-#slider{
+#navbar .site-menu{
+    height: 100%;
+    width: 825px;
+    padding-left: 40px;
+}
 
+#navbar .align-items-center{
+    width: 1140px;
+    height: 66px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#navbar .menu{
+    height: 100%;
+    width: 795px;
+    list-style-type: disc;
+    list-style: none;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+    margin-right: 0;
+    text-align: right;
+}
+
+/* #navbar > li{
+    display: inline-block;
+} */
+
+#navbar li{
+    line-height: 66px;
+    position: relative;
+    text-align: -webkit-match-parent;
+    display: inline-block;
+}
+
+#navbar li a{
+    font-size: 15px;
+    padding: 10px;
+    color: rgba(0,0,0,.6);
+    font-weight: 500;
+    line-height: 66px;
+}
+
+#navbar  a{
+    text-decoration: none;
+    color: #000;
+}
+
+#navbar  a:hover{
+    cursor: pointer;
+}
+
+#navbar  a:active{
+    color: #1c63fb;
+}
+
+.site-menu>li>a.active{
+    color: #1c63fb;
+}
+
+
+
+#slider{
+    width: 100%;
+    height: 1622px;
+    /* position: relative; */
+    line-height: 1.7;
+    color: gray;
+    font-weight: 300;
+    font-size: 1rem;
+    font-family: "Roboto",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    background-image: url(https://preview.colorlib.com/theme/booke/images/xpolygon.png.pagespeed.ic.nHRdkw8Vdv.webp);
+    background-position: -500px -1485px;
+    background-repeat: no-repeat;
+    padding-top: 272px;
+    padding-bottom: 112px;
+    top: 160px;
+    /* margin-top: 112px; */
+}
+
+#slider .slider-text{
+    width: 1140px;
+    height: 300px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+}
+#slider .text-in-images{
+    padding: 0 15px;
+}
+
+#slider .title-text{
+    font-size: 40px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 24px;
+}
+
+#slider .content-text{
+    font-size: 16px;
+    margin-bottom: 46px;
+    color: #fff;
+}
+
+#slider .button-slider{
+    padding: 16px 24px;
+    background-color: #fff;
+    font-size: 16px;
+    border-radius: 30px;
+}
+
+#slider .button-slider:hover{
+    cursor: pointer;
+    background-color: #1a67fa;
+    color: #fff;
+    border: #fff solid;
+}
+
+#slider a{
+    text-decoration: none;
+    color: #000;
+}
+
+#slider .slider-image{
+    width: 1140px;
+    height: 940px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    justify-content: center;
 }
 
 #features{
-
+    height: 1040px;
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 112px 0;
 }
 
+#features .features-text{
+    height: 196px;
+    width: 665px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 15px;
+}
 #screenshot{
 
 }
