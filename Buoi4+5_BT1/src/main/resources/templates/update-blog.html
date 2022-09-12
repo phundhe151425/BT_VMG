@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Update Blogs</h1>
+<form th:action="@{/blogs/updateblog/{id}(id=${blog.id})}" th:object="${blog}" method="post">
+    <table style="border: 1px solid; margin-bottom: 100px">
+        <tbody>
+        <tr>
+            <td>ID</td>
+            <td><input type="text" placeholder="ID" th:field="*{id}" readonly></td>
+        </tr>
+        <tr>
+            <td>Title</td>
+            <td><input type="text" placeholder="Title" th:field="*{title}"></td>
+<!--            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"> </span>-->
+        </tr>
+        <tr>
+            <td>Cover</td>
+            <td><input type="text" placeholder="Cover" th:field="*{cover}"></td>
+<!--            <span th:if="${#fields.hasErrors('cover')}" th:errors="*{cover}"> </span>-->
+        </tr>
+        <tr>
+            <td>Content</td>
+            <td><input type="text" placeholder="Content" th:field="*{content}"></td>
+<!--            <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"> </span>-->
+        </tr>
+        <tr>
+            <td>Category</td>
+            <td>
+                <select name="category">
+                    <option th:text="${blog.category.name}"></option>
+                    <th:block th:each="cate : ${listCategory}">
+
+<!--                        <option th:if="${{cate.id == blog.category.id}" th:value="${blog.category.id}"  th:text="${cate.name}" > </option>-->
+                        <option  th:value="${cate.id==blog.category.id}" th:text="${cate.name}" ></option>
+                    </th:block>
+                </select>
+            </td>
+
+        </tr>
+        <tr>
+            <td><input type="submit" value="Update Blog"></td>
+            <td></td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</form>
+</body>
+</html>

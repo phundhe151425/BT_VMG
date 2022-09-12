@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset=" UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Add Blogs</h1>
+<form  th:object="${blog}" method="post" enctype="multipart/form-data">
+    <table style="border: 1px solid; margin-bottom: 100px">
+        <tbody>
+        <!--        <tr>-->
+        <!--            <td>ID</td>-->
+        <!--            <td><input type="number" placeholder="ID" th:field="*{id}"></td>-->
+        <!--        </tr>-->
+        <tr>
+            <td>Title</td>
+            <td><input type="text" placeholder="Title" th:field="*{title}"></td>
+            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"> </span>
+        </tr>
+        <tr>
+            <td>Cover</td>
+            <td><input type="file" placeholder="Cover" th:field="*{cover}"></td>
+            <span th:if="${#fields.hasErrors('cover')}" th:errors="*{cover}"> </span>
+        </tr>
+        <tr>
+            <td>Content</td>
+            <td><input type="text" placeholder="Content" th:field="*{content}"></td>
+            <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"> </span>
+        </tr>
+        <tr>
+            <td>Category</td>
+            <td>
+                <select name="category">
+                    <option>Chon loai</option>
+                    <th:block th:each="cate : ${listCategory}">
+                        <option th:value="${cate.id}" th:text="${cate.name}"></option>
+                    </th:block>
+                </select>
+            </td>
+
+        </tr>
+        <tr>
+            <td><input type="submit" value="Add"></td>
+            <td><a th:href="@{/category/index}">View Category</a></td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</form>
+</body>
+</html>
