@@ -15,28 +15,35 @@
         </tr>
         <tr>
             <td>Title</td>
-            <td><input type="text" placeholder="Title" th:field="*{title}"></td>
-<!--            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"> </span>-->
+            <td>
+                <input type="text" placeholder="Title" th:field="*{title}">
+                <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"> </span>
+            </td>
+
         </tr>
         <tr>
             <td>Cover</td>
-            <td><input type="text" placeholder="Cover" th:field="*{cover}"></td>
-<!--            <span th:if="${#fields.hasErrors('cover')}" th:errors="*{cover}"> </span>-->
+            <td>
+                <input type="file" placeholder="Cover" th:field="*{cover}">
+<!--                <span th:if="${#fields.hasErrors('cover')}" th:errors="*{cover}"> </span>-->
+            </td>
+
         </tr>
         <tr>
             <td>Content</td>
-            <td><input type="text" placeholder="Content" th:field="*{content}"></td>
-<!--            <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"> </span>-->
+            <td>
+                <input type="text" placeholder="Content" th:field="*{content}">
+                <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"> </span>
+            </td>
+
         </tr>
         <tr>
             <td>Category</td>
             <td>
                 <select name="category">
-                    <option th:text="${blog.category.name}"></option>
+                    <option th:text="${blog.category.name}" selected></option>
                     <th:block th:each="cate : ${listCategory}">
-
-<!--                        <option th:if="${{cate.id == blog.category.id}" th:value="${blog.category.id}"  th:text="${cate.name}" > </option>-->
-                        <option  th:value="${cate.id==blog.category.id}" th:text="${cate.name}" ></option>
+                        <option  th:value="${cate.id}" th:text="${cate.name}"></option>
                     </th:block>
                 </select>
             </td>

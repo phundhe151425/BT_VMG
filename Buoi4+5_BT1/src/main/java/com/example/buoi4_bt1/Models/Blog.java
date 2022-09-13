@@ -1,9 +1,11 @@
 package com.example.buoi4_bt1.Models;
 
+import com.sun.istack.NotNull;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 
 @Entity
@@ -17,11 +19,15 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
     @Column(name = "title")
+    @NotBlank(message = "Title is mandatory")
     private String title;
     @Column(name = "cover")
+//    @NotBlank(message = "Cover is mandatory")
     private String cover;
     @Column(name = "content")
+    @NotBlank(message = "Content is mandatory")
     private String content;
 
     @ManyToOne

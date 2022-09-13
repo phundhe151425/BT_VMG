@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Add Blogs</h1>
-<form  th:object="${blog}" method="post" enctype="multipart/form-data">
+<form th:action="@{/blogs/addblog}" th:object="${blog}" method="post" enctype="multipart/form-data">
     <table style="border: 1px solid; margin-bottom: 100px">
         <tbody>
         <!--        <tr>-->
@@ -15,33 +15,45 @@
         <!--        </tr>-->
         <tr>
             <td>Title</td>
-            <td><input type="text" placeholder="Title" th:field="*{title}"></td>
-            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"> </span>
+            <td>
+                <input type="text" placeholder="Title" th:field="*{title}">
+                <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" > </span>
+
+            </td>
+
         </tr>
         <tr>
             <td>Cover</td>
-            <td><input type="file" placeholder="Cover" th:field="*{cover}"></td>
-            <span th:if="${#fields.hasErrors('cover')}" th:errors="*{cover}"> </span>
+            <td>
+                <input type="file" placeholder="Cover" th:field="*{cover}">
+                <span th:if="${#fields.hasErrors('cover')}" th:errors="*{cover}"> </span>
+            </td>
+
         </tr>
         <tr>
             <td>Content</td>
-            <td><input type="text" placeholder="Content" th:field="*{content}"></td>
-            <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"> </span>
+            <td>
+                <input type="text" placeholder="Content" th:field="*{content}">
+                <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"> </span>
+            </td>
+
         </tr>
         <tr>
             <td>Category</td>
             <td>
                 <select name="category">
-                    <option>Chon loai</option>
+                    <option  th:value="0">Chon loai</option>
                     <th:block th:each="cate : ${listCategory}">
                         <option th:value="${cate.id}" th:text="${cate.name}"></option>
                     </th:block>
                 </select>
+                <span th:if="${errorCategory}" th:errors="${errorCategory}"> </span>
             </td>
 
         </tr>
         <tr>
-            <td><input type="submit" value="Add"></td>
+            <td><input type="submit" value="Add">
+            </td>
             <td><a th:href="@{/category/index}">View Category</a></td>
         </tr>
 

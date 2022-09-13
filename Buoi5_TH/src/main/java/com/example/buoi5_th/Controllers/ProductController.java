@@ -7,16 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
@@ -48,12 +49,15 @@ public class ProductController {
         Product product1 = new Product.ProductBuilder(product.getName())
                 .description(product.getDescription()).build();
         MultipartFile multipartFile = product.getImage();
-        String fileName = multipartFile.getOriginalFilename();
+//        String fileName =  multipartFile.getOriginalFilename();
+        String fileName= StringUtils.cleanPath(multipartFile.getOriginalFilename());
         try {
             FileCopyUtils.copy(product.getImage().getBytes(), new File(this.fileUpload + fileName));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         product1.setImage(fileName);
         productService.save(product1);
         return new RedirectView("");

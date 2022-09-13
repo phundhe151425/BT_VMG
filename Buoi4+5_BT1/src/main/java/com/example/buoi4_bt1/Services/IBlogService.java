@@ -10,4 +10,6 @@ public interface IBlogService {
     void save(Blog blog);
     void delete(Integer id);
     Optional<Blog> findById(Integer id);
+
+    List<Blog> getBlogByCategoryId(Integer categoryID);
 }
