@@ -44,41 +44,17 @@ public class BlogController {
         List<Blog> listBlog = new ArrayList<>();
         model.addAttribute("listCategory", iCategoryService.getAll());
 
-        if(cateid.isPresent()){
+        if(cateid.isPresent() && cateid.get() != 0){
 //            listBlog = iBlogService.getBlogByCategoryId(cateid);
-            modelAndView.addObject("listBlogs", iCategoryService.findById(cateid.get()).get().getBlog());
+//            modelAndView.addObject("listBlogs", iCategoryService.findById(cateid.get()).get().getBlog());
+            listBlog = iCategoryService.findById(cateid.get()).get().getBlog();
+            model.addAttribute("cateSelected", cateid);
         }
         else{
             listBlog = iBlogService.getAll();
-
         }
         model.addAttribute("listBlogs", listBlog);
         return modelAndView;
-    }
-
-    @PostMapping("/index/cateid/{cateid}")
-    public String listBlogs(@PathVariable("cateid") int cateid, Model model) {
-        List<Blog> listBlog = new ArrayList<>();
-        if(cateid == 0){
-            listBlog = iBlogService.getAll();
-        }
-        else{
-            listBlog  = iBlogService.getBlogByCategoryId(cateid);
-        }
-        String categoryid = (String) model.getAttribute("categoryid");
-        int categoryid1 = 0;
-        try {
-            categoryid1 = Integer.parseInt(categoryid);
-        }catch (Exception e){}
-        if (categoryid1==0){
-            listBlog  = iBlogService.getAll();
-        }else{
-            listBlog = iBlogService.getBlogByCategoryId(categoryid1);
-        }
-
-        model.addAttribute("listCategory", iCategoryService.getAll());
-        model.addAttribute("listBlogs", listBlog);
-        return "index";
     }
 
 //    @GetMapping("/addblogform")
