@@ -36,15 +36,15 @@ public class TodoController {
         httpHeaders.add("todo", "/api/v1/todo/" + todo1.getId().toString());
         return new ResponseEntity<>(todo1, httpHeaders, HttpStatus.CREATED);
     }
-    //The function receives a PUT request, updates the Todo with the specified Id and returns the updated Todo
+
     @PutMapping({"/{todoId}"})
     public ResponseEntity<Todo> updateTodo(@PathVariable("todoId") Long todoId, @RequestBody Todo todo) {
         todoService.updateTodo(todoId, todo);
         return new ResponseEntity<>(todoService.getTodoById(todoId), HttpStatus.OK);
     }
-    //The function receives a DELETE request, deletes the Todo with the specified Id.
+
     @DeleteMapping({"/{todoId}"})
     public ResponseEntity<Todo> deleteTodo(@PathVariable("todoId") Long todoId) {
         todoService.deleteTodo(todoId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+    }}
