@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body style="text-align: center">
+<h1>List Blogs</h1>
+<!--th:action="@{'/blogs/index/cateid/' + ${cateid}}" method="post" id="cateid"-->
+<form id="cateid">
+    <select class="dropdown" th:name="cateid" onchange="document.getElementById('cateid').submit()">
+        <option th:value="0">Chon loai</option>
+        <th:block th:each="cate : ${listCategory}">
+            <option th:if="${cate.id == cateSelected}" th:value="${cate.id}" th:text="${cate.name}" th:selected=""></option>
+            <option th:if="${cate.id != cateSelected}" th:value="${cate.id}" th:text="${cate.name}"></option>
+        </th:block>
+    </select>
+
+</form>
+<div class="container" style="width: 100%;text-align: center">
+    <div class="row" style="width: 100%;text-align: center">
+        <div class="col-6">
+            <table class="table table-dark" style="width: 70%; margin-left: 45%;">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Cover</th>
+                    <th scope="col">Content</th>
+                    <th scope="col">Category</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+<!--                <div th:if="${!blogs.isEmpty()}">-->
+                    <tr th:each="b : ${listBlogs}">
+                        <td scope="row" th:text="${b.id}"></td>
+                        <td th:text="${b.title}"></td>
+<!--                                            <td><img th:src="'/image/'+${b.cover}" style="width: 100px"></td>-->
+                        <td>
+                            <img th:each="cover : ${b.covers}" th:src="'/image/'+${cover.name}" width="100px"/>
+<!--                            <br>-->
+                        </td>
+                        <td th:text="${b.content}"></td>
+                        <td th:text="${b.category.name}"></td>
+                        <td>
+                            <a class="btn btn-dark" th:href="@{/blogs/editblog/{id}(id=${b.id})}"
+                               style="background-color: white;color: black">Edit</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-dark" th:href="@{/blogs/delete/{id}(id=${b.id})}"
+                               style="background-color: white;color: black">Delete</a>
+                        </td>
+                    </tr>
+<!--                </div>-->
+<!--                <div th:if="${blogs.isEmpty()}">-->
+<!--                    <tr>-->
+<!--                        <td style="text-align: center">Khong co Blog!!!</td>-->
+<!--                    </tr>-->
+<!--                </div>-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div style="margin-top: 100px">
+    <a class="btn btn-dark" th:href="@{/blogs/addblog}"
+    >Add a new Blog</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <a class="btn btn-dark" th:href="@{/category/index}"
+    >View Category</a>
+</div>
+
+</body>
+</html>
