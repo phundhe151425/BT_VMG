@@ -1,65 +1,76 @@
-<!DOCTYPE html>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset=" UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 <h1>Add Blogs</h1>
 <form th:action="@{/blogs/addblog}" th:object="${blog}" method="post" enctype="multipart/form-data">
-    <table style="border: 1px solid; margin-bottom: 100px">
-        <tbody>
-        <!--        <tr>-->
-        <!--            <td>ID</td>-->
-        <!--            <td><input type="number" placeholder="ID" th:field="*{id}"></td>-->
-        <!--        </tr>-->
-        <tr>
-            <td>Title</td>
-            <td>
-                <input type="text" placeholder="Title" th:field="*{title}">
-                <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" > </span>
+    <div>
+        <div>
+            <div >
+            <table class="table table-dark" style="width:40%; margin-bottom: 100px">
+                <tbody>
+                <!--        <tr>-->
+                <!--            <td>ID</td>-->
+                <!--            <td><input type="number" placeholder="ID" th:field="*{id}"></td>-->
+                <!--        </tr>-->
+                <tr>
+                    <td>Title</td>
+                    <td>
+                        <input type="text" placeholder="Title" th:field="*{title}" required>
+                        <!--                <span style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>-->
+                        <span class="alert alert-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
+                              style=""></span>
 
-            </td>
+                    </td>
 
-        </tr>
-        <tr>
-            <td>Cover</td>
-            <td>
-                <input type="file" placeholder="Cover" th:field="*{cover}">
-                <span th:if="${#fields.hasErrors('cover')}" th:errors="*{cover}"> </span>
-            </td>
+                </tr>
+                <tr>
+                    <td>Cover</td>
+                    <td>
+                        <input type="file" placeholder="Cover" multiple="multiple" th:field="*{files}" required>
+                        <span style="color: red" th:if="${#fields.hasErrors('files')}" th:errors="*{files}"></span>
+                    </td>
 
-        </tr>
-        <tr>
-            <td>Content</td>
-            <td>
-                <input type="text" placeholder="Content" th:field="*{content}">
-                <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"> </span>
-            </td>
+                </tr>
+                <tr>
+                    <td>Content</td>
+                    <td>
+                        <textarea placeholder="Content" th:field="*{content}" required></textarea>
+                        <!--                <span style="color: red" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>-->
+                        <span class="alert alert-danger" th:if="${#fields.hasErrors('content')}"
+                              th:errors="*{content}"></span>
+                    </td>
 
-        </tr>
-        <tr>
-            <td>Category</td>
-            <td>
-                <select name="category">
-                    <option  th:value="0">Chon loai</option>
-                    <th:block th:each="cate : ${listCategory}">
-                        <option th:value="${cate.id}" th:text="${cate.name}"></option>
-                    </th:block>
-                </select>
-                <span th:if="${errorCategory}" th:errors="${errorCategory}"> </span>
-            </td>
+                </tr>
+                <tr>
+                    <td>Category</td>
+                    <td>
+                        <select name="category" required>
+                            <option th:value="0">Chon loai</option>
+                            <th:block th:each="cate : ${listCategory}">
+                                <option th:value="${cate.id}" th:text="${cate.name}"></option>
+                            </th:block>
+                        </select>
+                        <!--                <span th:if="${errorCategory}" th:errors="${errorCategory}"> </span>-->
+                    </td>
 
-        </tr>
-        <tr>
-            <td><input type="submit" value="Add">
-            </td>
-            <td><a th:href="@{/category/index}">View Category</a></td>
-        </tr>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td><input type="submit" value="Add">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a th:href="@{/category/index}">View Category</a></td>
+                </tr>
 
-        </tbody>
-    </table>
-
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
 </form>
 </body>
 </html>

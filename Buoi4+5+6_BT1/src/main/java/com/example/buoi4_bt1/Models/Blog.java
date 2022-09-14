@@ -6,10 +6,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
+import java.util.Set;
 
 
 @Entity
-@Table(name="blog")
+@Table(name = "blog")
 @Getter
 @Setter
 //@NoArgsConstructor
@@ -23,26 +25,49 @@ public class Blog {
     @Column(name = "title")
     @NotBlank(message = "Title is mandatory")
     private String title;
-    @Column(name = "cover")
+    //    @Column(name = "cover")
 //    @NotBlank(message = "Cover is mandatory")
-    private String cover;
+//    private String cover;
+    @OneToMany(mappedBy = "blog")
+    private Set<Cover> covers;
     @Column(name = "content")
     @NotBlank(message = "Content is mandatory")
     private String content;
 
     @ManyToOne
-    @JoinColumn(name="categoryID")
+    @JoinColumn(name = "categoryID")
     private Category category;
 
+    @Transient
+    private List<MultipartFile> files;
+
+    public List<MultipartFile> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<MultipartFile> files) {
+        this.files = files;
+    }
+
+    public Set<Cover> getCovers() {
+        return covers;
+    }
+
+    public void setCovers(Set<Cover> covers) {
+        this.covers = covers;
+    }
+
+
+    public Blog() {
+    }
 
     public Blog(BlogBuilder blogBuilder) {
         this.title = blogBuilder.title;
         this.content = blogBuilder.content;
-        this.cover = blogBuilder.cover;
     }
 
-    public Blog() {
-    }
+
+
     public static class BlogBuilder {
         private final String title;
         private String cover;
