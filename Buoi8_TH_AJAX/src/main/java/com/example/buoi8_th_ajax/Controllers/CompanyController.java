@@ -1,7 +1,7 @@
 package com.example.buoi8_th_ajax.Controllers;
 
 import com.example.buoi8_th_ajax.Models.Company;
-import com.example.buoi8_th_ajax.Services.CompanyService;
+import com.example.buoi8_th_ajax.Services.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import java.util.List;
 public class CompanyController {
 
     @Autowired
-    private CompanyService companyService;
+    private CrudService companyService;
 
     @GetMapping("/companyList")
     public ResponseEntity<List<Company>> getCompanyList(){
