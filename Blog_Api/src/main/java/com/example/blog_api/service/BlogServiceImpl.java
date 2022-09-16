@@ -60,8 +60,8 @@ public class BlogServiceImpl implements BlogService{
         return blogRepository.findBlogsByAuthor_Name(authorName);
     }
 
-    public List<Blog> findBlogsBySearch(String key1, String key2, String key3){
-        return blogRepository.findBlogsBySearch(key1,key2,key3);
+    public List<Blog> findBlogsBySearch(String key){
+        return blogRepository.findBlogsBySearch(key);
     }
 
 

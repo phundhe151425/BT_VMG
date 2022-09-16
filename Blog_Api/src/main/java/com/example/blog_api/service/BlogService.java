@@ -31,7 +31,7 @@ public interface BlogService {
 
 
 
-    List<Blog> findBlogsBySearch(String key1,String key2,String key3);
+    List<Blog> findBlogsBySearch(String key);
 }
 
 

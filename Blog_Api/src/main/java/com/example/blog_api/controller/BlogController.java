@@ -84,18 +84,12 @@ public class BlogController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @GetMapping("/blogs/search")
-    public ResponseEntity<List<Blog>> searchBlog(@RequestParam(name = "key") Optional<String> key){
+    public ResponseEntity<List<Blog>> searchBlog(@RequestParam(name = "key") String key){
         try{
             List<Blog> blogs = new ArrayList<Blog>();
-
+//            blogs = blogService.findByAuthorName(key);
+            blogs = blogService.findBlogsBySearch(key);
             System.out.println(blogs);
-            if(key.isPresent()) {
-                blogs = blogService.findByAuthorName(key.get());
-//                blogs = blogService.findBlogsBySearch(key.get(),key.get(),key.get());
-            }
-            else {
-                blogs = blogService.getAll();
-            }
 
             if (blogs.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);

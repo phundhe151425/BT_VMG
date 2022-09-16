@@ -31,7 +31,7 @@ public class Blog {
 //    @NotBlank(message = "Cover is mandatory")
 //    private String cover;
     @OneToMany(mappedBy = "blog")
-    @JsonIgnore
+
     private Set<Cover> covers;
     @Column(name = "content")
     @NotBlank(message = "Content is mandatory")
