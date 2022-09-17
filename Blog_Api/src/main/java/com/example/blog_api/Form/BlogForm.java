@@ -1,5 +1,6 @@
 package com.example.blog_api.Form;
 
+import com.example.blog_api.model.Author;
 import com.example.blog_api.model.Category;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +26,8 @@ public class BlogForm {
     private String content;
 
     private Category category;
+
+    private Author author;
 
     private List<MultipartFile> files;
 

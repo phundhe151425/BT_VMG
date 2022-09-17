@@ -24,4 +24,9 @@ public class CoverServiceImpl implements CoverService{
             }
         }
     }
+
+    @Override
+    public Cover save(Cover cover) {
+        return coverRepository.save(cover);
+    }
 }

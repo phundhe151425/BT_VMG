@@ -4,51 +4,74 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
+    <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <style>
-        .btn btn-dark:hover{
+        .btn btn-dark:hover {
             background-color: aqua;
             color: black;
         }
     </style>
     <script>
-        
-        $(document).ready(function() {
-                $.getJSON('http://localhost:8080/api/blogs', function(blogs) {
-                var tr=[];
+        // function blogs() {
+        //     $.getJSON('http://localhost:8080/api/blogs', function (blogs) {
+        //         console.log(blogs)
+        //         var tr = [];
+        //         for (var i = 0; i < blogs.length; i++) {
+        //             tr.push('<tr>');
+        //             tr.push('<td>' + blogs[i].id + '</td>');
+        //             tr.push('<td>' + blogs[i].title + '</td>');
+        //             tr.push('<td>' + blogs[i].author.name + '</td>');
+        //             tr.push('<td>');
+        //             for (var j = 0; j < blogs[i].covers.length; j++) {
+        //                 tr.push(`<img src="${'http://localhost:8080/image/' + blogs[i].covers[j].name}" width="100px">`)
+        //                 // tr.push('>')
+        //                 // tr.push(blogs[i].covers[j].name)
+        //             }
+        //             tr.push('</td>');
+        //
+        //             tr.push('<td>' + blogs[i].content + '</td>');
+        //             tr.push('<td>' + blogs[i].category.name + '</td>');
+        //             tr.push('<td><button class="btn btn-dark">Edit</button>&nbsp;&nbsp;<button class="btn btn-dark" id=' + blogs[i].id + '>Delete</button></td>');
+        //             tr.push('</tr>');
+        //         }
+        //         $('table').append($(tr.join('')));
+        //     });
+        // }
+
+        $(document).ready(function () {
+            $.getJSON('http://localhost:8080/api/blogs', function showList(blogs) {
+                var tr = [];
                 for (var i = 0; i < blogs.length; i++) {
                     tr.push('<tr>');
                     tr.push('<td>' + blogs[i].id + '</td>');
                     tr.push('<td>' + blogs[i].title + '</td>');
                     tr.push('<td>' + blogs[i].author.name + '</td>');
                     tr.push('<td>');
-                        for(var j =0; j< blogs[i].covers.length;j++){
-                            tr.push(`<img src="${'http://localhost:8080/image/' + blogs[i].covers[j].name}" width="100px">`)
-                            // tr.push('>')
-                            // tr.push(blogs[i].covers[j].name)
-                        }
+                    for (var j = 0; j < blogs[i].covers.length; j++) {
+                        tr.push(`<img src="${'http://localhost:8080/image/' + blogs[i].covers[j].name}" width="100px">`)
+                    }
                     tr.push('</td>');
 
                     tr.push('<td>' + blogs[i].content + '</td>');
                     tr.push('<td>' + blogs[i].category.name + '</td>');
-                    tr.push('<td><button class="btn btn-dark">Edit</button>&nbsp;&nbsp;<button class="btn btn-dark" id=' + blogs[i].id + '>Delete</button></td>');
+                    tr.push(`<td><button type="button" onclick="showEditForm(${blogs[i].id})"  data-bs-toggle="modal" data-bs-target="#myModal1" class="btn btn-dark">Update</button></td>&nbsp;&nbsp;`);
+                    tr.push(`<td><button onclick="deleteBlog(${blogs[i].id})" class="btn btn-dark">Delete</button></td>`)
                     tr.push('</tr>');
                 }
                 $('table').append($(tr.join('')));
             });
-
-
-
         })
 
-        function showCreateForm(){
+        function showCreateForm() {
             let content = `<div class="container">
                     <form id="form-blog">
                         <div class="mb-3">
@@ -60,11 +83,17 @@
                             <input type="file" name="files" multiple class="form-control" id="files">
                         </div>
                         <div class="mb-3">
-                        <label for="list-cate">Category</label>
-                        <select name="category" id="list-cate">
+                            <label for="list-cate">Category</label>
+                            <select name="category" id="list-cate">
 
-                        </select>
-                    </div>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="list-cate">Author</label>
+                            <select name="author" id="list-authors">
+
+                            </select>
+                        </div>
                         <div class="mb-3">
                             <label for="content" class="form-label">Content</label>
                             <input name="content" type="text" class="form-control" id="content">
@@ -75,30 +104,150 @@
                              <button type="submit" class="btn btn-primary" onclick="create()">Create</button>
                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                         </div>`
-            $("#showModal").html(content);
-            showCategoryList();
+            $("#showModal").html(content)
+            showCategoryList()
+            showAuthorList()
         }
 
-        function showCategoryList(){
-            $.getJSON('http://localhost:8080/api/cates', function(cates) {
+        function create() {
+            // var title = $("#title").val();
+            // var files = $("#files").val();
+            // var cateid = $("#list-cate").val();
+            // var content = $("#content").val();
+            let form = $('#form-blog')[0];
+            // console.log(title);
+            let blogForm = new FormData(form);
+            console.log(blogForm)
+            $.ajax({
+                type: 'POST',
+                enctype: 'multipart/form-data',
+                processData: false,
+                contentType: false,
+                data: blogForm,
+                url: 'http://localhost:8080/api/blogs',
+                onsuccess:function (){
+                    showList();
+                }
+            });
+
+            event.preventDefault();
+        }
+
+        function deleteBlog(id){
+            $.ajax({
+                type:"DELETE",
+                url:`http://localhost:8080/api/blogs/${id}`,
+                success : function () {
+                    showList()
+                }
+            })
+        }
+        function showEditForm(id){
+            let content = `<div class="container">
+                    <form id="u-form-blog">
+                        <div class="mb-3">
+                            <label for="u-title" class="form-label">Title</label>
+                            <input type="text" name="title" class="form-control" id="u-title">
+                        </div>
+                        <div class="mb-3">
+                            <label for="u-covers" class="form-label">Cover</label>
+                            <div id="showImg1"></div>
+                            <input type="file" name="files" multiple class="form-control" id="u-files">
+                        </div>
+                        <div class="mb-3">
+                            <label for="u-category" class="form-label">Category</label>
+                            <select name="category"  id="u-list-cate">
+
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="u-author" class="form-label">Author</label>
+                            <select name="category"  id="u-list-cate">
+
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="u-content" class="form-label">Content</label>
+                            <input type="text" name="content" class="form-control" id="u-content">
+                        </div>
+                        </form>
+                </div>
+                <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="editBlog(${id})" data-bs-dismiss="modal">Edit</button>
+
+                        </div>`
+            $("#showModalEdit").html(content);
+            showCategoryList();
+            showAuthorList()
+            $.ajax({
+                type:"GET",
+                url:`http://localhost:8080/blogs/${id}`,
+                success:function (blog){
+                    console.log(blog)
+                    $('#u-title').val(blog.title)
+                    let img = ''
+                    for (let i = 0; i < blog.covers.length; i++) {
+                        console.log(blog.covers[i])
+                        img += `<img src="http://localhost:8080/image/${blog.covers[i].name}" width="100">`
+                    }
+                    $('#u-category').val(blog.category)
+                    $('#u-author').val(blog.author)
+                    $('#u-content').val(blog.content)
+                    $("#showImg1").html(img)
+                }
+            })
+        }
+
+        function editBlog(id){
+            let form = $('#u-form-blog')[0];
+            console.log(form)
+            let blogForm = new FormData(form);
+            console.log(blogForm)
+            $.ajax({
+                type:"PUT",
+                enctype: 'multipart/from-data',
+                processData: false,
+                contentType: false,
+                data: blogForm,
+                url:`http://localhost:8080/api/blogs/${id}`,
+                success:showList
+            })
+            event.preventDefault();
+        }
+
+        function showCategoryList() {
+            $.getJSON('http://localhost:8080/api/cates', function (cates) {
                 console.log(cates)
-                var option=[];
+                var option = [];
                 for (var i = 0; i < cates.length; i++) {
                     option.push(`<option value="${cates[i].id}">  ${cates[i].name} </option>`);
                 }
-                $('select').append($(option.join('')));
+                $('#list-cate').append($(option.join('')));
             });
         }
-        showCategoryList()
 
+        function showAuthorList() {
+            $.getJSON('http://localhost:8080/api/authors', function (authors) {
+                console.log(authors)
+                var option = [];
+                for (var i = 0; i < authors.length; i++) {
+                    option.push(`<option value="${authors[i].id}">  ${authors[i].name} </option>`);
+                }
+                $('#list-authors').append($(option.join('')));
+            });
+        }
+
+        // showCategoryList()
 
 
     </script>
 </head>
 <body>
 <div>
-  <button type="button" class="btn btn-dark  btn-add"  onclick="showCreateForm()"
-          style="padding: 10px 20px;margin: 30px 50px" data-bs-toggle="modal" data-bs-target="#myModal">Add new Blog</button>
+    <button type="button" class="btn btn-dark  btn-add" onclick="showCreateForm()"
+            style="padding: 10px 20px;margin: 30px 50px" data-bs-toggle="modal" data-bs-target="#myModal">Add new Blog
+    </button>
 </div>
 
 <div class="modal" id="myModal">
@@ -118,8 +267,32 @@
     </div>
 
 </div>
+
+<div class="modal" id="myModal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Blog</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="showEditForm()"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" id="showModalEdit">
+
+            </div>
+
+            <!-- Modal footer -->
+
+
+        </div>
+    </div>
+
+</div>
+
 <table class="table">
-    <thead class="thead-dark" >
+    <thead class="thead-dark">
     <tr>
         <th scope="col">ID</th>
         <th scope="col">Title</th>
