@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <title>VueJs</title>
+
+</head>
+
+
+<body>
+
+    <div class="header">
+        <h1>APP</h1>
+    </div>
+
+    <div id="app">
+        <input type="text" v-model="title">
+        <p >{{ title }}</p>
+        <p v-html="maHTML"></p>
+        <p v-once>{{ title }} ==== {{ showPost() }}</p>
+        <a :href="link">Link fb</a>
+    </div>
+
+    <div class="footer">
+        <h1>OBJ</h1>
+    </div>
+
+    <div class="obj">
+        <h1>Bam de tang gia tri</h1>
+        <h1>Gia tri A: {{ giaTriA }}</h1>
+        <h1>Gia tri B: {{ giatriB }}</h1>
+        <button @mouseup="a++">Button tang a</button>
+        <button @mouseup="b++">Button tang b</button>
+        <button @mouseup="dem++">Button</button>
+        <p>gia tri: {{ dem }}</p>
+        <p>gia tri: {{ dem > 20 ? "ahahahahaha" : "huhuhuhuhu"}}</p>
+        <span @mouseover.stop="">Dung Su kien</span>
+        <p>Toc do chuot: {{ x }}/{{ y }}</p>
+
+        <div>
+            <input type="text" @keyup.enter="banPhim">
+        </div>
+    </div>
+    
+
+    
+
+</body>
+
+</html>
+<script src="./script.js"></script>
